@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VibeCon — Pitch Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0A1F;
+    --bg-deep: #07071A;
+    --panel: #10102B;
+    --ink: #F2F2F8;
+    --ink-dim: #9999B3;
+    --ink-faint: #55557A;
+    --pink: #FF00FF;
+    --blue: #00CFFF;
+    --purple: #B266FF;
+    --rule: rgba(153, 153, 179, 0.18);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { background: var(--bg-deep); }
+
+  body {
+    font-family: 'Figtree', sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    background: var(--bg);
+    overflow: hidden;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  /* ---------- atmosphere ---------- */
+  .slide::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 207, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 207, 255, 0.025) 1px, transparent 1px);
+    background-size: 96px 96px;
+    pointer-events: none;
+  }
+  .slide::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 120% 90% at 50% 40%, transparent 55%, rgba(7, 7, 26, 0.85) 100%);
+    pointer-events: none;
+  }
+  .grain {
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .content { position: relative; z-index: 2; height: 100%; padding: 110px 140px; display: flex; flex-direction: column; }
+
+  /* ---------- corner ticks ---------- */
+  .tick { position: absolute; width: 26px; height: 26px; z-index: 3; }
+  .tick::before, .tick::after { content: ""; position: absolute; background: var(--accent, var(--ink-faint)); opacity: 0.7; }
+  .tick::before { width: 100%; height: 1px; }
+  .tick::after { width: 1px; height: 100%; }
+  .tick.tl { top: 44px; left: 44px; }
+  .tick.tr { top: 44px; right: 44px; transform: scaleX(-1); }
+  .tick.bl { bottom: 44px; left: 44px; transform: scaleY(-1); }
+  .tick.br { bottom: 44px; right: 44px; transform: scale(-1); }
+
+  /* ---------- footer ---------- */
+  .foot {
+    position: absolute; bottom: 48px; left: 140px; right: 140px;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 17px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-faint); z-index: 4; font-weight: 500;
+  }
+  .foot .no { font-family: 'Orbitron', sans-serif; font-size: 15px; color: var(--accent, var(--ink-faint)); }
+
+  /* ---------- shared type ---------- */
+  .kicker {
+    font-size: 20px; font-weight: 600; letter-spacing: 0.34em; text-transform: uppercase;
+    color: var(--accent); display: flex; align-items: center; gap: 28px; margin-bottom: 64px;
+  }
+  .kicker::after { content: ""; height: 1px; width: 180px; background: var(--accent); opacity: 0.55; }
+  .kicker .idx { font-family: 'Orbitron', sans-serif; font-weight: 700; }
+
+  h1 { font-family: 'Orbitron', sans-serif; font-weight: 900; line-height: 1.04; }
+
+  .body-l { font-size: 31px; font-weight: 300; line-height: 1.55; color: var(--ink-dim); max-width: 1320px; }
+  .body-l strong { color: var(--ink); font-weight: 500; }
+
+  /* =================================================================
+     SLIDE 1 — COVER
+  ================================================================== */
+  .s-cover { --accent: var(--pink); }
+  .s-cover .content { justify-content: center; align-items: flex-start; }
+  .s-cover .wordmark {
+    font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 218px; letter-spacing: 0.02em;
+    color: var(--ink);
+    text-shadow: 0 0 18px rgba(255, 0, 255, 0.55), 0 0 70px rgba(255, 0, 255, 0.35), 0 0 140px rgba(178, 102, 255, 0.25);
+  }
+  .s-cover .wordmark .con { color: var(--pink); }
+  .s-cover .tagline { font-size: 44px; font-weight: 300; color: var(--ink); margin-top: 54px; letter-spacing: 0.01em; }
+  .s-cover .tagline em { font-style: normal; color: var(--blue); font-weight: 500; }
+  .s-cover .meta-row {
+    margin-top: 110px; display: flex; gap: 64px; align-items: baseline;
+    font-size: 22px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-dim); font-weight: 500;
+  }
+  .s-cover .meta-row .sep { width: 56px; height: 1px; background: var(--ink-faint); align-self: center; }
+  .s-cover .deck-label {
+    position: absolute; top: 110px; right: 140px;
+    font-size: 19px; letter-spacing: 0.34em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600;
+  }
+
+  /* =================================================================
+     SLIDE 2 — WHAT IS VIBECON
+  ================================================================== */
+  .s-what { --accent: var(--blue); }
+  .s-what h1 { font-size: 100px; max-width: 1620px; }
+  .s-what h1 .hl { color: var(--blue); }
+  .s-what .body-l { margin-top: 64px; }
+  .s-what .statline {
+    margin-top: auto; display: flex; border-top: 1px solid var(--rule); padding-top: 52px; margin-bottom: 40px;
+  }
+  .s-what .stat { flex: 1; }
+  .s-what .stat + .stat { border-left: 1px solid var(--rule); padding-left: 64px; }
+  .s-what .stat .v { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 72px; color: var(--ink); white-space: nowrap; }
+  .s-what .stat .v span { color: var(--blue); font-size: 42px; }
+  .s-what .stat .k { font-size: 19px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink-faint); margin-top: 16px; font-weight: 500; }
+
+  /* =================================================================
+     TRACK SLIDES (3, 4, 5)
+  ================================================================== */
+  .s-track .content { padding-top: 100px; }
+  .s-track .t-num {
+    position: absolute; right: 110px; top: 70px;
+    font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 300px;
+    color: transparent; -webkit-text-stroke: 2px var(--accent);
+    opacity: 0.18; z-index: 1; letter-spacing: 0.02em;
+  }
+  .s-track h1 { font-size: 110px; }
+  .s-track h1 .hl { color: var(--accent); }
+  .s-track .lead { margin-top: 48px; font-size: 40px; font-weight: 400; color: var(--ink); max-width: 1400px; line-height: 1.35; }
+  .s-track .lead em { font-style: normal; color: var(--accent); }
+  .s-track .points { margin-top: 84px; max-width: 1480px; }
+  .s-track .pt { display: flex; gap: 44px; padding: 34px 0; border-top: 1px solid var(--rule); align-items: baseline; }
+  .s-track .pt:last-child { border-bottom: 1px solid var(--rule); }
+  .s-track .pt .m { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 20px; color: var(--accent); min-width: 64px; }
+  .s-track .pt p { font-size: 28px; font-weight: 300; color: var(--ink-dim); line-height: 1.45; }
+  .s-track .pt p strong { color: var(--ink); font-weight: 500; }
+
+  .s-code { --accent: var(--blue); }
+  .s-design { --accent: var(--pink); }
+  .s-sec { --accent: var(--purple); }
+
+  /* =================================================================
+     SLIDE 6 — CLOSE
+  ================================================================== */
+  .s-close { --accent: var(--pink); }
+  .s-close .content { justify-content: center; align-items: flex-start; }
+  .s-close h1 {
+    font-size: 124px; max-width: 1640px;
+    text-shadow: 0 0 16px rgba(255, 0, 255, 0.5), 0 0 60px rgba(255, 0, 255, 0.3), 0 0 130px rgba(178, 102, 255, 0.22);
+  }
+  .s-close h1 .hl { color: var(--pink); }
+  .s-close .pair {
+    margin-top: 90px; font-size: 28px; font-weight: 300; color: var(--ink-dim);
+    border-left: 2px solid var(--purple); padding-left: 40px; max-width: 1250px; line-height: 1.5;
+  }
+  .s-close .pair strong { color: var(--ink); font-weight: 500; }
+  .s-close .meta-row {
+    margin-top: 100px; display: flex; gap: 64px; align-items: baseline;
+    font-size: 22px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-dim); font-weight: 500;
+  }
+  .s-close .meta-row .sep { width: 56px; height: 1px; background: var(--ink-faint); align-self: center; }
+  .s-close .contact { margin-top: 70px; font-size: 30px; font-weight: 300; color: var(--ink-dim); }
+  .s-close .contact strong { color: var(--ink); font-weight: 600; }
+  .s-close .contact .site { color: var(--pink); font-weight: 500; }
+
+  /* ---------- screen preview: scale slides to viewport ---------- */
+  @media screen {
+    body { display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 40px 0; }
+    .slide { box-shadow: 0 30px 80px rgba(0,0,0,0.6); zoom: var(--fit, 1); }
+  }
+
+  @media print {
+    html, body { background: var(--bg); }
+    body { display: block; padding: 0; }
+    .slide { box-shadow: none; zoom: 1 !important; }
+  }
+  @page { size: 1920px 1080px; margin: 0; }
+</style>
+</head>
+<body>
+
+<!-- ============ 1 / COVER ============ -->
+<section class="slide s-cover">
+  <div class="grain"></div>
+  <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+  <div class="deck-label">Pitch Deck — 2026</div>
+  <div class="content">
+    <div class="wordmark">VIBE<span class="con">CON</span></div>
+    <div class="tagline">Actually <em>making things</em> with AI — not theorizing about it.</div>
+    <div class="meta-row">
+      <span>Bucharest</span><span class="sep"></span>
+      <span>November 2026</span><span class="sep"></span>
+      <span>by Kickstart</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 / WHAT IS VIBECON ============ -->
+<section class="slide s-what">
+  <div class="grain"></div>
+  <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+  <div class="content">
+    <div class="kicker"><span class="idx">01</span><span>What Is VibeCon</span></div>
+    <h1>One of the first conferences built around <span class="hl">making things</span> with AI.</h1>
+    <p class="body-l">VibeCon is where young, AI-obsessed people come to learn how to use AI <strong>the smart way</strong> — and walk out knowing how to spin up a platform, an app, a tool, or anything else <strong>from zero</strong>.</p>
+    <div class="statline">
+      <div class="stat"><div class="v">2<span> days</span></div><div class="k">Talks + Workshops</div></div>
+      <div class="stat"><div class="v">3<span> tracks</span></div><div class="k">Code · Design · Security</div></div>
+      <div class="stat"><div class="v">150</div><div class="k">Attendees</div></div>
+      <div class="stat"><div class="v">NOV</div><div class="k">Bucharest 2026</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>VibeCon — Pitch Deck</span><span class="no">02 / 06</span></div>
+</section>
+
+<!-- ============ 3 / VIBE CODING ============ -->
+<section class="slide s-track s-code">
+  <div class="grain"></div>
+  <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+  <div class="t-num">01</div>
+  <div class="content">
+    <div class="kicker"><span class="idx">02</span><span>Direction One</span></div>
+    <h1>Vibe <span class="hl">Coding</span></h1>
+    <p class="lead">From a blank screen to a <em>real, working app</em>.</p>
+    <div class="points">
+      <div class="pt"><span class="m">/A</span><p>How to actually talk to AI tools so they build <strong>what you mean</strong> — not just slop.</p></div>
+      <div class="pt"><span class="m">/B</span><p><strong>Vibe Debugging</strong> — what to do when the code breaks. The part nobody warns you about.</p></div>
+      <div class="pt"><span class="m">/C</span><p>Taking the thing <strong>live</strong>, so real people can use it — not just your localhost.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>VibeCon — Pitch Deck</span><span class="no">03 / 06</span></div>
+</section>
+
+<!-- ============ 4 / VIBE DESIGN ============ -->
+<section class="slide s-track s-design">
+  <div class="grain"></div>
+  <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+  <div class="t-num">02</div>
+  <div class="content">
+    <div class="kicker"><span class="idx">03</span><span>Direction Two</span></div>
+    <h1>Vibe <span class="hl">Design</span></h1>
+    <p class="lead">Making it look like you <em>didn't build it in an afternoon</em>.</p>
+    <div class="points">
+      <div class="pt"><span class="m">/A</span><p>Turning a prompt into a <strong>clean, polished interface</strong> — with an actual brand and identity behind it.</p></div>
+      <div class="pt"><span class="m">/B</span><p>Designing <strong>flows people can use</strong>, and going from a design straight into working code.</p></div>
+      <div class="pt"><span class="m">/C</span><p>Using AI in your <strong>marketing campaigns and designs</strong>.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>VibeCon — Pitch Deck</span><span class="no">04 / 06</span></div>
+</section>
+
+<!-- ============ 5 / CYBERSECURITY ============ -->
+<section class="slide s-track s-sec">
+  <div class="grain"></div>
+  <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+  <div class="t-num">03</div>
+  <div class="content">
+    <div class="kicker"><span class="idx">04</span><span>Direction Three</span></div>
+    <h1>Cyber<span class="hl">security</span></h1>
+    <p class="lead">The part everyone skips — which is exactly why their app <em>gets "hacked"</em>.</p>
+    <div class="points">
+      <div class="pt"><span class="m">/A</span><p>Most vibe-coded apps ship with security that's <strong>bad or nonexistent</strong> — we cover the holes these apps always have.</p></div>
+      <div class="pt"><span class="m">/B</span><p>How to <strong>not leak API keys and secrets</strong>, and how to do logins and permissions properly.</p></div>
+      <div class="pt"><span class="m">/C</span><p>How to <strong>pressure-test an app</strong> before someone else does it for them.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>VibeCon — Pitch Deck</span><span class="no">05 / 06</span></div>
+</section>
+
+<!-- ============ 6 / CLOSE ============ -->
+<section class="slide s-close">
+  <div class="grain"></div>
+  <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+  <div class="content">
+    <div class="kicker"><span class="idx">05</span><span>See You There</span></div>
+    <h1>Learn it on stage.<br><span class="hl">Build it</span> the same day.</h1>
+    <p class="pair">The conference is paired with <strong>VibeHack</strong>, so the people building there can take what they see on stage and apply it in real time, straight into their own project.</p>
+    <div class="meta-row">
+      <span>Bucharest</span><span class="sep"></span>
+      <span>November 2026</span><span class="sep"></span>
+      <span>by Kickstart</span>
+    </div>
+    <div class="contact"><strong>Tudor Nae</strong> · Kickstart &nbsp;&nbsp;·&nbsp;&nbsp; <span class="site">vibehack.eu</span></div>
+  </div>
+  <div class="foot"><span>VibeCon — Pitch Deck</span><span class="no">06 / 06</span></div>
+</section>
+
+<script>
+  (function () {
+    function fit() {
+      var scale = Math.min(1, (window.innerWidth - 64) / 1920);
+      document.documentElement.style.setProperty('--fit', scale);
+    }
+    fit();
+    window.addEventListener('resize', fit);
+  })();
+</script>
+</body>
+</html>
